@@ -232,12 +232,15 @@ namespace Napier_Bank_Messaging.ViewModels
             Email newEmail = new Email();
 
             emailSingleton es = emailSingleton.getInstance();
-            newEmail = es.getEmail("E234");
+            newEmail = es.getEmail("E123");
 
             string fileName = "Email.json";
-            using FileStream createStream = File.Create(fileName);
-            await JsonSerializer.SerializeAsync(createStream, newEmail);
-            createStream.Dispose();
+            //using FileStream createStream = File.Create(fileName);
+            string jsonString = JsonSerializer.Serialize(newEmail);
+            using StreamWriter appendStream = File.AppendText(fileName);
+            appendStream.WriteLine(jsonString + "\n");
+            appendStream.Dispose();
+            //createStream.Dispose();
 
             MessageBox.Show(File.ReadAllText(fileName));
 

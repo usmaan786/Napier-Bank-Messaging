@@ -8,6 +8,7 @@ namespace Napier_Bank_Messaging
 {
     public class Email
     {
+
         private string id;
         private bool sir;
         private string sortCode;

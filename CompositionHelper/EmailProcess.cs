@@ -27,7 +27,8 @@ namespace CompositionHelper
         }
         public string[] GetMention(string messageBody)
         {
-            int index = messageBody.IndexOf('@');
+            string[] line = messageBody.Split(' ');
+            messageBody = messageBody.Remove(0, line[0].Length);
 
             string[] mentions = messageBody.Split(' ', '#');
 

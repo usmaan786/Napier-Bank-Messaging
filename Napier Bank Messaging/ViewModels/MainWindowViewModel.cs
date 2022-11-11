@@ -205,7 +205,7 @@ namespace Napier_Bank_Messaging.ViewModels
 
         private void TestButtonClick()
         {
-            //emailSerialization();
+            emailSerialization();
         }
 
         private void emailSave(string sortCode, string incident)
@@ -227,21 +227,21 @@ namespace Napier_Bank_Messaging.ViewModels
 
         }
 
-        /*public void emailSerialization()
+        public static async void emailSerialization()
         {
             Email newEmail = new Email();
 
             emailSingleton es = emailSingleton.getInstance();
-            newEmail = es.getEmail("E123");
+            newEmail = es.getEmail("E234");
 
             string fileName = "Email.json";
             using FileStream createStream = File.Create(fileName);
-            string jsonString = JsonSerializer.Serialize<Email>(newEmail);
-            //File.WriteAllText(fileName, jsonString);
+            await JsonSerializer.SerializeAsync(createStream, newEmail);
+            createStream.Dispose();
 
-            MessageBox.Show(jsonString);
+            MessageBox.Show(File.ReadAllText(fileName));
 
-        }*/
+        }
 
 
     }

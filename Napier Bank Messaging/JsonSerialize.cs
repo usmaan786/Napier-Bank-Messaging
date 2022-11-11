@@ -11,5 +11,7 @@ namespace Napier_Bank_Messaging
 {
     public class JsonSerialize
     {
+
+
     }
 }

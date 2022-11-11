@@ -44,8 +44,6 @@
   <ItemGroup>
     <Compile Include="BodyCompositionHelper.cs" />
     <Compile Include="EmailProcess.cs" />
-    <Compile Include="SmsProcess.cs" />
-    <Compile Include="TweetProcess.cs" />
     <Compile Include="ProcessType.cs" />
     <Compile Include="ProcessCompositionHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

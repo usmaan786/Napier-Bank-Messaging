@@ -86,7 +86,7 @@ namespace Napier_Bank_Messaging.ViewModels
             helper = new ProcessCompositionHelper();
             helper.AssembleProcessComponents();
 
-            var result = helper.Execute(MessageHeaderText.ToString());
+            var result = "";
 
             var method = GetMethod(MessageHeaderText.ToString());
 
@@ -98,28 +98,29 @@ namespace Napier_Bank_Messaging.ViewModels
             string[] mentionList = null;
             string sortCode = null;
             string incident = null;
-            //need to fix if statement
-            if(method == "Tweet")
-            {
-                hashtagList = bodyHelper.ExecuteHashtag(MessageBodyText.ToString(), method);
-                mentionList = bodyHelper.ExecuteMention(MessageBodyText.ToString(), method);
 
-                tweetSave(hashtagList,mentionList);
+            string sender = null;
+            string subject = null;
+            string message = null;
+
+            //need to fix if statement
+            if (method == "Tweet")
+            {
+                result = helper.Execute(MessageHeaderText.ToString(), MessageBodyText.ToString(), ref sender, ref subject, ref message);
 
                 
             }
             else if(method == "Email")
             {
-                if(MessageBodyText.StartsWith("SIR"))
-                {
-                    sortCode = bodyHelper.ExecuteSIR(MessageBodyText.ToString(), method);
-                    incident = bodyHelper.ExecuteIncident(MessageBodyText.ToString(), method);
-                    emailSave(sortCode,incident);
-                }
+                result = helper.Execute(MessageHeaderText.ToString(), MessageBodyText.ToString(),ref sender, ref subject, ref message);
                 
             }
+            else if(method == "SMS")
+            {
+                result = helper.Execute(MessageHeaderText.ToString(), MessageBodyText.ToString(), ref sender, ref subject, ref message);
+            }
 
-            MessageBox.Show(string.Format(result + incident));
+            MessageBox.Show(string.Format(result + " " + message));
         }
 
         private void ExpandButtonClick()
@@ -133,7 +134,7 @@ namespace Napier_Bank_Messaging.ViewModels
                 bodyHelper = new BodyCompositionHelper();
                 bodyHelper.AssembleBodyComponents();
 
-                expandedText = bodyHelper.ExecuteTextspeak(ref originalText, textspeak, "SMS");
+                expandedText = bodyHelper.ExecuteTextspeak(ref originalText, textspeak);
 
                 MessageBodyText = originalText;
                 ExpandedText = expandedText;
@@ -217,7 +218,7 @@ namespace Napier_Bank_Messaging.ViewModels
 
             /// Need to add validation for all inputs here later.
             newEmail.emailID = MessageHeaderText.ToString();
-            newEmail.SIR = true;
+            newEmail.Subject = "true";
             newEmail.SortCode = sortCode;
             newEmail.Incident = incident;
 

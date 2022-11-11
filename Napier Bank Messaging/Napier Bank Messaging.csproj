@@ -64,6 +64,9 @@
     <Compile Include="EmailDB.cs" />
     <Compile Include="EmailSingleton.cs" />
     <Compile Include="JsonSerialize.cs" />
+    <Compile Include="SMS.cs" />
+    <Compile Include="SmsDB.cs" />
+    <Compile Include="SmsSingleton.cs" />
     <Compile Include="Tweet.cs" />
     <Compile Include="TweetDB.cs" />
     <Compile Include="TweetSingleton.cs" />

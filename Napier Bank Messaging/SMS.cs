@@ -6,15 +6,13 @@ using System.Threading.Tasks;
 
 namespace Napier_Bank_Messaging
 {
-    public class Tweet
+    public class SMS
     {
         private string id;
         private string sender;
         private string message;
-        private string mention;
-        private string hashtag;
 
-        public string tweetID
+        public string SmsID
         {
             get { return id; }
             set { id = value; }
@@ -29,19 +27,7 @@ namespace Napier_Bank_Messaging
         public string Message
         {
             get { return message; }
-            set { message = value; }    
+            set { message = value; }
         }
-        public string Mention
-        {
-            get { return mention; }
-            set { mention = value; }
-        }
-
-        public string Hashtag
-        {
-            get { return hashtag; }
-            set { hashtag = value; }
-        }
-
     }
 }

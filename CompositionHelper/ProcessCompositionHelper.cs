@@ -32,9 +32,9 @@ namespace CompositionHelper
             }
 
         }
-        public string Execute(string messageHeader)
+        public string Execute(string messageHeader, string messageBody, ref string sender, ref string subject, ref string message)
         {
-            return ProcessPlugin.GetType(messageHeader);
+            return ProcessPlugin.GetType(messageHeader, messageBody, ref sender, ref subject, ref message);
         }
     }
 }

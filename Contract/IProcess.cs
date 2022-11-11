@@ -8,6 +8,6 @@ namespace Contract
 {
     public interface IProcess
     {
-        string GetType(string messageHeader);
+        string GetType(string messageHeader,string messageBody, ref string sender, ref string subject, ref string message);
     }
 }

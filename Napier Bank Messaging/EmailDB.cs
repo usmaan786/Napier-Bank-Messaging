@@ -31,7 +31,7 @@ namespace Napier_Bank_Messaging
         {
             foreach (var item in db.Values)
             {
-                emailList = emailList + "SIR - " + item.SIR + " " + item.SortCode + " " + item.Incident + " " + "\n";
+                emailList = emailList + "Subject - " + item.Subject + " " + item.SortCode + " " + item.Incident + " " + "\n";
             }
             return;
         }

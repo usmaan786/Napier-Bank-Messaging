@@ -10,7 +10,10 @@ namespace Napier_Bank_Messaging
     {
 
         private string id;
-        private bool sir;
+        private string sender;
+        private string subject;
+        private string message;
+
         private string sortCode;
         private string incident;
 
@@ -21,10 +24,22 @@ namespace Napier_Bank_Messaging
             set { id = value; }
         }
 
-        public bool SIR
+        public string Sender
         {
-            get { return sir; }
-            set { sir = value; }
+            get { return sender; }
+            set { sender = value; }
+        }
+
+        public string Subject
+        {
+            get { return subject; }
+            set { subject = value; }
+        }
+
+        public string Message
+        {
+            get { return message; }
+            set { message = value; }
         }
 
         public string SortCode

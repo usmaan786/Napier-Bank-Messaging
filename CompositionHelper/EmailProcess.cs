@@ -10,14 +10,14 @@ using System.IO;
 namespace CompositionHelper
 {
     [Export(typeof(IBodyProcess))]
-    [ExportMetadata("BodyMetaData", "Email")]
+
     public class EmailProcess : IBodyProcess
     {
         public string GetBody(string messageBody)
         {
             return "Email is from X .";
         }
-      
+
         public string[] GetHashtag(string messageBody)
         {
 
@@ -58,9 +58,30 @@ namespace CompositionHelper
 
         public string GetTextspeak(ref string messageBody, string[] textspeakAbbrev)
         {
+            string expandedText = messageBody;
+
+            foreach (string line in textspeakAbbrev)
+            {
+                string[] value = line.Split(',');
+
+                if (messageBody.Contains(value[0]))
+                {
+                    int index = messageBody.IndexOf(value[0]);
+
+                    index = index + value[0].Length;
+
+                    messageBody = messageBody.Insert(index, "<>");
+
+                    index = expandedText.IndexOf(value[0]);
+                    index = index + value[0].Length;
+
+                    expandedText = expandedText.Insert(index, "<" + value[1] + ">");
 
 
-            return messageBody;
+                }
+            }
+
+            return expandedText;
         }
 
 

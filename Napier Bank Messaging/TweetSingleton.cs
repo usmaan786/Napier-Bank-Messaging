@@ -26,21 +26,24 @@ namespace Napier_Bank_Messaging
 
         public void addTweet(Tweet t)
         {
-            db.add(t.tweetID, t);
+            db.add(t.TweetID, t);
         }
 
         public Tweet getTweet(string tweetID)
         {
             return db.get(tweetID);
         }
-        public String getList
+
+        public void addHashtag(ref string tweetID, string hashtag)
         {
-            get
-            {
-                String tweetList = "";
-                db.returnList(ref tweetList);
-                return tweetList;
-            }
+            db.allocateHashtag(ref tweetID, hashtag);
+            return;
+        }
+
+        public void addMention(ref string tweetID, string mention)
+        {
+            db.allocateMention(ref tweetID, mention);
+            return;
         }
 
     }

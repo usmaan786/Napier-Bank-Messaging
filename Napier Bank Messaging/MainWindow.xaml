@@ -12,9 +12,8 @@
         <TextBlock HorizontalAlignment="Left" Margin="242,171,0,0" TextWrapping="Wrap" Text="{Binding MessageBodyBlock}" VerticalAlignment="Top" Height="20" Width="60"/>
         <TextBox HorizontalAlignment="Left" Height="114" Margin="319,170,0,0" TextWrapping="Wrap" Text="{Binding MessageBodyText}" VerticalAlignment="Top" Width="228"/>
         <Button Content="{Binding ProcessButton}" Command ="{Binding ProcessButtonCommand}" HorizontalAlignment="Left" Margin="319,317,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Content="{Binding TestButton}" Command ="{Binding TestButtonCommand}" HorizontalAlignment="Right" Margin="0,317,255,0" VerticalAlignment="Top" Width="75"/>
         <Button Content="{Binding ExpandTextButton}" Command="{Binding ExpandTextCommand}" HorizontalAlignment="Left" Margin="319,352,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Content="{Binding ClearButton}" Command ="{Binding ClearButtonCommand}" HorizontalAlignment="Left" Margin="462,352,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="{Binding ClearButton}" Command ="{Binding ClearButtonCommand}" HorizontalAlignment="Left" Margin="472,317,0,0" VerticalAlignment="Top" Width="75"/>
 
     </Grid>
 </Window>

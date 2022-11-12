@@ -20,18 +20,39 @@ namespace CompositionHelper
 
         public string[] GetHashtag(string messageBody)
         {
+            List<string> list = new List<string>();
+            string[] line = messageBody.Split(' ');
 
-            string[] hashtags = messageBody.Split(' ', '@');
+            foreach(string value in line)
+            {
+                if(value.StartsWith("#"))
+                {
+                    list.Add(value);
+                }
+            }
+
+            string[] hashtags = list.ToArray();
 
             return hashtags;
         }
         public string[] GetMention(string messageBody)
         {
+            List<string> list = new List<string>();
+
             string[] line = messageBody.Split(' ');
             messageBody = messageBody.Remove(0, line[0].Length);
 
-            string[] mentions = messageBody.Split(' ', '#');
+            foreach(string value in line)
+            {
+                if(value.StartsWith("@") && messageBody.Contains(value))
+                {
+                    list.Add(value);
+                }
+            }
 
+            string[] mentions = list.ToArray();
+
+          
             return mentions;
         }
 
@@ -46,13 +67,35 @@ namespace CompositionHelper
             return sortCode;
         }
 
-        public string GetIncident(string messageBody)
+        public string GetIncident(string messageBody, string[] incidentData)
         {
-            int startIndex = messageBody.IndexOf("Nature of Incident: ");
+            string incident=null;
+            bool incidentFound = false;
+
+            try
+            {
+                foreach (string line in incidentData)
+                {
+                    if (messageBody.Contains("Nature of Incident") && messageBody.Contains(line) && incidentFound == false)
+                    {
+                        int index = messageBody.IndexOf(line);
+
+                        incident = line;
+                        incidentFound = true;
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return "Invalid Nature of Incident - See instructions for help.";
+            }
+
+            /*int startIndex = messageBody.IndexOf("Nature of Incident: ");
 
             string incident = messageBody.Substring(startIndex, 25);
 
-            incident = incident.Remove(0, 19);
+            incident = incident.Remove(0, 19);*/
 
             return incident;
         }
@@ -83,6 +126,26 @@ namespace CompositionHelper
             }
 
             return expandedText;
+        }
+
+        public string[] GetURL(string messageBody)
+        {
+            string[] value = messageBody.Split(' ');
+            List<string> list = new List<string>();
+
+                foreach (string line in value)
+                {
+                    if (line.Contains("https") || line.Contains("www."))
+                    {
+                        list.Add(line);      
+
+                    }
+                }
+
+            string[] urlList = list.ToArray();
+
+
+            return urlList;
         }
 
 

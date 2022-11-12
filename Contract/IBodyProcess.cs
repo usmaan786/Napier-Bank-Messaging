@@ -17,8 +17,11 @@ namespace Contract
 
         string GetSortCode(string messageBody);
 
-        string GetIncident(string messageBody);
+        string GetIncident(string messageBody, string[] incidentData);
 
         string GetTextspeak(ref string messageBody,string[] textspeakAbbrev);
+
+        string[] GetURL(string messageBody);
+
     }
 }

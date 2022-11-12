@@ -27,11 +27,27 @@ namespace Napier_Bank_Messaging
             return db[val];
         }
 
-        public void returnList(ref String tweetList)
+
+        public void allocateHashtag(ref string tweetID, string hashtag)
         {
-            foreach(var item in db.Values)
+            foreach (var item in db.Values)
             {
-                tweetList = tweetList + "ID - " + item.tweetID + " "  + item.Hashtag + " " + item.Mention + "\n";
+                if (item.TweetID == tweetID)
+                {
+                    item.addHashtag(tweetID, hashtag);
+                }
+            }
+            return;
+        }
+
+        public void allocateMention(ref string tweetID, string mention)
+        {
+            foreach (var item in db.Values)
+            {
+                if (item.TweetID == tweetID)
+                {
+                    item.addMention(tweetID, mention);
+                }
             }
             return;
         }

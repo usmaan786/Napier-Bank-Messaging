@@ -46,7 +46,6 @@ namespace Napier_Bank_Messaging.ViewModels
             MessageBodyBlock = "Body";
 
             ProcessButton = "Process";
-            TestButton = "Test";
             ExpandTextButton = "Expand Text";
             ClearButton = "Clear";
 
@@ -94,10 +93,6 @@ namespace Napier_Bank_Messaging.ViewModels
             bodyHelper.AssembleBodyComponents();
 
             //var bodyProcess = bodyHelper.Execute(MessageBodyText.ToString(), method);
-            string[] hashtagList=null;
-            string[] mentionList = null;
-            string sortCode = null;
-            string incident = null;
 
             string sender = null;
             string subject = null;
@@ -106,27 +101,60 @@ namespace Napier_Bank_Messaging.ViewModels
             //need to fix if statement
             if (method == "Tweet")
             {
-                result = helper.Execute(MessageHeaderText.ToString(), MessageBodyText.ToString(), ref sender, ref subject, ref message);
+                string[] hashtagList = null;
+                string[] mentionList = null;
 
-                
+                result = helper.Execute(MessageHeaderText.ToString(), MessageBodyText.ToString(), ref sender, ref subject, ref message);
+                hashtagList = bodyHelper.ExecuteHashtag(MessageBodyText.ToString());
+                mentionList = bodyHelper.ExecuteMention(MessageBodyText.ToString());
+
+                ExpandText();
+
+                tweetSave(sender, message, hashtagList, mentionList);
+
             }
             else if(method == "Email")
             {
                 result = helper.Execute(MessageHeaderText.ToString(), MessageBodyText.ToString(),ref sender, ref subject, ref message);
-                
+                if(subject.Contains("SIR"))
+                {
+                    string[] incidentData = File.ReadAllLines(@"F:\Software Coursework 2022\incident.csv");
+                    string sortCode = null;
+                    string incident = null;
+                    string[] urlList = null;
+
+                    urlList = bodyHelper.ExecuteURL(MessageBodyText.ToString());
+                    sortCode = bodyHelper.ExecuteSIR(MessageBodyText.ToString());
+                    incident = bodyHelper.ExecuteIncident(MessageBodyText.ToString(),incidentData);
+
+                    emailSave(sender,subject,message,sortCode, incident,urlList);
+                    
+                }
+                else
+                {
+                    string[] urlList = null;
+
+                    urlList = bodyHelper.ExecuteURL(MessageBodyText.ToString());
+
+                    emailSave(sender,subject,message,"N/A", "N/A",urlList);
+                }
             }
             else if(method == "SMS")
             {
                 result = helper.Execute(MessageHeaderText.ToString(), MessageBodyText.ToString(), ref sender, ref subject, ref message);
-            }
+                ExpandText();
 
-            MessageBox.Show(string.Format(result + " " + message));
+                smsSave(sender, message);
+            }
+            
+
+            MessageBox.Show(string.Format(result));
         }
 
-        private void ExpandButtonClick()
+        public void ExpandText()
         {
             string[] textspeak = File.ReadAllLines(@"F:\Software Coursework 2022\textwords (1).csv");
-            if (Formatted== false)
+            if (Formatted == false)
             {
                 string expandedText = ExpandedText;
                 string originalText = MessageBodyText;
@@ -143,10 +171,11 @@ namespace Napier_Bank_Messaging.ViewModels
 
                 Formatted = true;
 
-             return;
+                return;
             }
-
-
+        }
+        private void ExpandButtonClick()
+        {
 
             if (MessageBodyText.Equals(OriginalText) && Formatted==true)
             {
@@ -179,71 +208,154 @@ namespace Napier_Bank_Messaging.ViewModels
             return "Invalid";
         }
 
-        public void tweetSave(string[] hashtagList, string[] mentionList)
+        public void smsSave(string sender, string message)
         {
+            string smsID = MessageHeaderText.ToString();
+
+            smsSingleton ss = smsSingleton.getInstance();
+            SMS newSMS = new SMS();
+            //process in TweetProcess.cs and return values for newTweet object to store.
+            newSMS.SmsID = smsID;
+            newSMS.Sender = sender;
+            newSMS.Message = message;
+
+            ss.addSMS(newSMS);
+
+            smsSerialization(newSMS);
+
+
+        }
+
+        public static async void smsSerialization(SMS newSMS)
+        {
+
+            string fileName = "Messages.json";
+            string jsonString = JsonSerializer.Serialize(newSMS);
+
+            if (!File.Exists(fileName))
+            {
+                using FileStream createStream = File.Create(fileName);
+                await JsonSerializer.SerializeAsync(createStream, newSMS);
+                createStream.Dispose();
+            }
+            else
+            {
+                using StreamWriter appendStream = File.AppendText(fileName);
+                appendStream.WriteLine("\\n");
+                appendStream.WriteLine(jsonString);
+                appendStream.Dispose();
+                //createStream.Dispose();
+
+            }
+            //using FileStream createStream = File.Create(fileName);
+
+        }
+
+        public void tweetSave(string sender, string message, string[] hashtagList, string[] mentionList)
+        {
+            string tweetID = MessageHeaderText.ToString();
+
+            tweetSingleton ts = tweetSingleton.getInstance();
             Tweet newTweet = new Tweet();
             //process in TweetProcess.cs and return values for newTweet object to store.
-            newTweet.tweetID = MessageHeaderText.ToString();
-            foreach(var hashtag in hashtagList)
+            newTweet.TweetID = tweetID;
+            newTweet.Sender = sender;
+            newTweet.Message = message;
+
+            ts.addTweet(newTweet);
+
+            foreach (var hashtag in hashtagList)
             {
-                if (hashtag.StartsWith("#"))
-                {
-                    newTweet.Hashtag = hashtag;
-                }
+                ts.addHashtag(ref tweetID, hashtag);
             }
             foreach(var mention in mentionList)
             {
-                if (mention.StartsWith("@"))
-                {
-                    newTweet.Mention = mention;
-                }
+                ts.addMention(ref tweetID, mention);
                 
             }
+
+            tweetSerialization(newTweet);
            
-            tweetSingleton ts = tweetSingleton.getInstance();
-            ts.addTweet(newTweet);
+
         }
+        public static async void tweetSerialization(Tweet newTweet)
+        {
+
+            string fileName = "Messages.json";
+            string jsonString = JsonSerializer.Serialize(newTweet);
+
+            if (!File.Exists(fileName))
+            {
+                using FileStream createStream = File.Create(fileName);
+                await JsonSerializer.SerializeAsync(createStream, newTweet);
+                createStream.Dispose();
+            }
+            else
+            {
+                using StreamWriter appendStream = File.AppendText(fileName);
+                appendStream.WriteLine("\\n");
+                appendStream.WriteLine(jsonString);
+                appendStream.Dispose();
+                //createStream.Dispose();
+
+            }
+            //using FileStream createStream = File.Create(fileName);
+
+        }
+
 
         private void TestButtonClick()
         {
-            emailSerialization();
+            //emailSerialization();
         }
 
-        private void emailSave(string sortCode, string incident)
+        private void emailSave(string sender, string subject, string message, string sortCode, string incident, string[] urlList)
         {
             Email newEmail = new Email();
 
-            string url = "https://test.com";
             string emailID = MessageHeaderText.ToString();
 
             /// Need to add validation for all inputs here later.
-            newEmail.emailID = MessageHeaderText.ToString();
-            newEmail.Subject = "true";
+            newEmail.emailID = emailID;
+            newEmail.Sender = sender;
+            newEmail.Subject = subject;
+            newEmail.Message = message;
             newEmail.SortCode = sortCode;
             newEmail.Incident = incident;
 
             emailSingleton es = emailSingleton.getInstance();
             es.addEmail(newEmail);
-            es.addURL(ref emailID, url);
+            foreach(string value in urlList)
+            {
+                es.addURL(ref emailID, value);
+            }
+            
 
+            emailSerialization(newEmail);
         }
 
-        public static async void emailSerialization()
+        public static async void emailSerialization(Email newEmail)
         {
-            Email newEmail = new Email();
 
-            emailSingleton es = emailSingleton.getInstance();
-            newEmail = es.getEmail("E123");
-
-            string fileName = "Email.json";
-            //using FileStream createStream = File.Create(fileName);
+            string fileName = "Messages.json";
             string jsonString = JsonSerializer.Serialize(newEmail);
-            using StreamWriter appendStream = File.AppendText(fileName);
-            appendStream.WriteLine(jsonString + "\n");
-            appendStream.Dispose();
-            //createStream.Dispose();
 
-            MessageBox.Show(File.ReadAllText(fileName));
+            if (!File.Exists(fileName))
+            {
+                using FileStream createStream = File.Create(fileName);
+                await JsonSerializer.SerializeAsync(createStream, newEmail);
+                createStream.Dispose();
+            }
+            else
+            {
+                using StreamWriter appendStream = File.AppendText(fileName);
+                appendStream.WriteLine("\\n");
+                appendStream.WriteLine(jsonString);
+                appendStream.Dispose();
+                //createStream.Dispose();
+
+            }
+            //using FileStream createStream = File.Create(fileName);
 
         }
 

@@ -66,7 +66,7 @@ namespace Napier_Bank_Messaging
                 String list = "";
                 foreach (URL u in urlLinks)
                 {
-                    list = list + u.urlLink + "\n";
+                    list = list + u.urlLink;
                 }
                 return list;
             }

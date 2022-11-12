@@ -63,7 +63,9 @@
     <Compile Include="Email.cs" />
     <Compile Include="EmailDB.cs" />
     <Compile Include="EmailSingleton.cs" />
+    <Compile Include="Hashtag.cs" />
     <Compile Include="JsonSerialize.cs" />
+    <Compile Include="Mention.cs" />
     <Compile Include="SMS.cs" />
     <Compile Include="SmsDB.cs" />
     <Compile Include="SmsSingleton.cs" />

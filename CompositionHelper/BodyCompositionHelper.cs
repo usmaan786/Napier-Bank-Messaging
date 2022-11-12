@@ -71,11 +71,11 @@ namespace CompositionHelper
             return result;
         }
 
-        public string ExecuteIncident(string messageBody)
+        public string ExecuteIncident(string messageBody,string[] incidentData)
         {
             string result = null;
          
-                    result = BodyProcessPlugin.GetIncident(messageBody);
+                    result = BodyProcessPlugin.GetIncident(messageBody, incidentData);
          
 
             
@@ -88,6 +88,15 @@ namespace CompositionHelper
                     result = BodyProcessPlugin.GetTextspeak(ref messageBody, textspeakAbbrev);
               
               
+            return result;
+        }
+
+        public string[] ExecuteURL(string messageBody)
+        {
+            string[] result;
+
+            result = BodyProcessPlugin.GetURL(messageBody);
+
             return result;
         }
     }

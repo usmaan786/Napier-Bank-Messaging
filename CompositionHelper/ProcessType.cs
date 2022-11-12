@@ -113,6 +113,28 @@ namespace CompositionHelper
                     return "No subject";
                 }
 
+                try
+                  {
+                        string[] value = message.Split(' ');
+
+                        foreach( string line in value)
+                        {
+                            if(line.Contains("https") || line.Contains("www."))
+                            {
+                                int index = message.IndexOf(line);
+
+                                message = message.Remove(index, line.Length);
+                                message = message.Insert(index, "<URL Quarantined>");
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        return "Type - Email | No valid URL links found";
+                    }
+                
+
+
 
 
 

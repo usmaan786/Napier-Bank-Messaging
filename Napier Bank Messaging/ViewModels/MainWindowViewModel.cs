@@ -30,11 +30,16 @@ namespace Napier_Bank_Messaging.ViewModels
         public string ClearButton { get; private set; }
         public string ExpandTextButton { get; private set; }
 
+        public string EndButton { get; private set; }
+
+
         public ICommand ProcessButtonCommand { get; private set; }
         public ICommand TestButtonCommand { get; private set; }
         public ICommand ExpandTextCommand { get; private set; }
 
         public ICommand ClearButtonCommand { get; private set; }
+
+        public ICommand EndButtonCommand { get; private set; }
 
         public string ExpandedText { get; private set; }
         public string OriginalText { get; private set; }
@@ -48,6 +53,7 @@ namespace Napier_Bank_Messaging.ViewModels
             ProcessButton = "Process";
             ExpandTextButton = "Expand Text";
             ClearButton = "Clear";
+            EndButton = "End Session";
 
             MessageHeaderText = string.Empty;
             MessageBodyText = string.Empty;
@@ -61,9 +67,15 @@ namespace Napier_Bank_Messaging.ViewModels
             TestButtonCommand = new RelayCommand(TestButtonClick);
             ExpandTextCommand = new RelayCommand(ExpandButtonClick);
             ClearButtonCommand = new RelayCommand(ClearButtonClick);
+            EndButtonCommand = new RelayCommand(EndButtonClick);
 
         }
 
+        private void EndButtonClick()
+        {
+            Summary summaryWin = new Summary();
+            summaryWin.ShowDialog();
+        }
         private void ClearButtonClick()
         {
             MessageBodyText = string.Empty;
@@ -109,7 +121,7 @@ namespace Napier_Bank_Messaging.ViewModels
                 mentionList = bodyHelper.ExecuteMention(MessageBodyText.ToString());
 
                 ExpandText();
-
+                 
                 tweetSave(sender, message, hashtagList, mentionList);
 
             }
@@ -127,6 +139,9 @@ namespace Napier_Bank_Messaging.ViewModels
                     sortCode = bodyHelper.ExecuteSIR(MessageBodyText.ToString());
                     incident = bodyHelper.ExecuteIncident(MessageBodyText.ToString(),incidentData);
 
+                    MessageBodyText = sender + subject + message;
+                    OnChanged(nameof(MessageBodyText));
+
                     emailSave(sender,subject,message,sortCode, incident,urlList);
                     
                 }
@@ -135,6 +150,9 @@ namespace Napier_Bank_Messaging.ViewModels
                     string[] urlList = null;
 
                     urlList = bodyHelper.ExecuteURL(MessageBodyText.ToString());
+
+                    MessageBodyText = sender + subject + message;
+                    OnChanged(nameof(MessageBodyText));
 
                     emailSave(sender,subject,message,"N/A", "N/A",urlList);
                 }

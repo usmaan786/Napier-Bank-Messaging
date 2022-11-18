@@ -46,5 +46,17 @@ namespace Napier_Bank_Messaging
             return;
         }
 
+        public void returnHashtagList(ref List<string>hashtags, ref List<int> count)
+        {
+            db.hashtagList(ref hashtags, ref count);
+            return;
+        }
+
+        public void returnMentionList(ref List<string>mentions)
+        {
+            db.mentionList(ref mentions);
+            return;
+        }
+
     }
 }

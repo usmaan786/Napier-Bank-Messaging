@@ -51,5 +51,46 @@ namespace Napier_Bank_Messaging
             }
             return;
         }
+
+        public void hashtagList(ref List<string> hashtags, ref List<int> count)
+        {
+         
+            foreach(var item in db.Values)
+            {
+                string[] list = item.HashtagList.Split(' ');
+                foreach(string line in list)
+                {
+                    if(!hashtags.Contains(line))
+                    {
+                        hashtags.Add(line);
+                        count.Add(1);
+                    }
+                    else
+                    {
+                        int index = hashtags.IndexOf(line);
+
+                        count[index]++;
+                    }
+                }
+              
+            }
+            return;
+        }
+
+        public void mentionList(ref List<string> mentions)
+        {
+            foreach(var item in db.Values)
+            {
+                string[] list = item.MentionList.Split(' ');
+                foreach(string line in list)
+                {
+                    mentions.Add(line);
+                }
+
+            }
+            return;
+        }
+
+
     }
 }

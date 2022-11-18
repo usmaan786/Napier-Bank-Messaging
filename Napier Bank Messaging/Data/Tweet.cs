@@ -50,7 +50,7 @@ namespace Napier_Bank_Messaging
                 String list = "";
                 foreach (Hashtag h in hashtags)
                 {
-                    list = list + h.HashtagString;
+                    list = list + h.HashtagString + " ";
                 }
                 return list;
             }
@@ -63,7 +63,7 @@ namespace Napier_Bank_Messaging
                 String list = "";
                 foreach (Mention m in mentions)
                 {
-                    list = list + m.MentionString;
+                    list = list + m.MentionString + " ";
                 }
                 return list;
             }

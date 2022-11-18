@@ -41,6 +41,7 @@
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
     <Reference Include="System.Text.Json, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -60,19 +61,21 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\RelayCommand.cs" />
-    <Compile Include="Email.cs" />
-    <Compile Include="EmailDB.cs" />
-    <Compile Include="EmailSingleton.cs" />
-    <Compile Include="Hashtag.cs" />
-    <Compile Include="JsonSerialize.cs" />
-    <Compile Include="Mention.cs" />
-    <Compile Include="SMS.cs" />
-    <Compile Include="SmsDB.cs" />
-    <Compile Include="SmsSingleton.cs" />
-    <Compile Include="Tweet.cs" />
-    <Compile Include="TweetDB.cs" />
-    <Compile Include="TweetSingleton.cs" />
-    <Compile Include="URL.cs" />
+    <Compile Include="Data\Email.cs" />
+    <Compile Include="Data\EmailDB.cs" />
+    <Compile Include="Data\EmailSingleton.cs" />
+    <Compile Include="Data\Hashtag.cs" />
+    <Compile Include="Data\Mention.cs" />
+    <Compile Include="Data\SMS.cs" />
+    <Compile Include="Data\SmsDB.cs" />
+    <Compile Include="Data\SmsSingleton.cs" />
+    <Compile Include="Data\Tweet.cs" />
+    <Compile Include="Data\TweetDB.cs" />
+    <Compile Include="Data\TweetSingleton.cs" />
+    <Compile Include="Data\URL.cs" />
+    <Compile Include="ViewModels\Summary.xaml.cs">
+      <DependentUpon>Summary.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Page Include="MainWindow.xaml">
@@ -87,6 +90,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ViewModels\Summary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

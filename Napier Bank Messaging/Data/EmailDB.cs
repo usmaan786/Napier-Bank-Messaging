@@ -47,5 +47,22 @@ namespace Napier_Bank_Messaging
             }
             return;
         }
+
+        public void SIRList(ref List<string> SIRs, ref List<string>sortCodes, ref List<string>incidents)
+        {
+            foreach(var item in db.Values)
+            {
+                if(item.Subject.Contains("SIR"))
+                {
+                    SIRs.Add(item.Subject);
+                    sortCodes.Add(item.SortCode);
+                    incidents.Add(item.Incident);
+                }
+            }
+
+
+
+            return;
+        }
     }
 }

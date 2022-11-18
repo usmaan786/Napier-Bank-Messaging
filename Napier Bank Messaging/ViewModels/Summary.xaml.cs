@@ -54,6 +54,24 @@ namespace Napier_Bank_Messaging
 
             MentionText.Text = mentionsString;
 
+
+            List<string> SIR = new List<string>();
+            List<string> sortCode = new List<string>();
+            List<string> incident = new List<string>();
+
+            emailSingleton es = emailSingleton.getInstance();
+
+            es.returnSIR(ref SIR, ref sortCode, ref incident);
+
+            string SIRstring = string.Empty;
+
+            for(int i=0; i<SIR.Count; i++)
+            {
+                SIRstring = SIRstring + SIR[i] + " Sort Code: " + sortCode[i] + " Nature of Incident: " + incident[i] + "\n";
+
+            }
+
+            SIRText.Text = SIRstring;
         }
 
         private void EndBtn_Click(object sender, RoutedEventArgs e)

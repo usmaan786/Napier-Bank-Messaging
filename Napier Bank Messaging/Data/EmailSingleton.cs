@@ -48,5 +48,11 @@ namespace Napier_Bank_Messaging
             db.allocateURL(ref emailID, url);
             return;
         }
+
+        public void returnSIR(ref List<string> SIRs, ref List<string> sortCodes, ref List<string> incidents)
+        {
+            db.SIRList(ref SIRs, ref sortCodes, ref incidents);
+            return;
+        }
     }
 }

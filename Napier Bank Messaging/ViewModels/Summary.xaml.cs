@@ -25,6 +25,22 @@ namespace Napier_Bank_Messaging
         { 
             InitializeComponent();
 
+            displayHashtag();
+
+            displayMention();
+
+            displaySIR();
+
+            
+        }
+
+        private void EndBtn_Click(object sender, RoutedEventArgs e)
+        {
+            System.Environment.Exit(0);
+        }
+
+        public void displayHashtag()
+        {
             tweetSingleton ts = tweetSingleton.getInstance();
 
             List<string> hashtags = new List<string>();
@@ -34,12 +50,18 @@ namespace Napier_Bank_Messaging
 
             string hashtagString = string.Empty;
 
-            for(int i = 0; i < hashtags.Count; i++)
+            for (int i = 0; i < hashtags.Count; i++)
             {
                 hashtagString = hashtagString + hashtags[i] + " - " + count[i] + "\n";
             }
 
             HashtagText.Text = hashtagString;
+
+        }
+
+        public void displayMention()
+        {
+            tweetSingleton ts = tweetSingleton.getInstance();
 
             List<string> mentions = new List<string>();
 
@@ -47,17 +69,22 @@ namespace Napier_Bank_Messaging
 
             string mentionsString = string.Empty;
 
-            foreach(string mention in mentions)
+            foreach (string mention in mentions)
             {
                 mentionsString = mentionsString + mention + "\n";
             }
 
             MentionText.Text = mentionsString;
 
+        }
+
+        public void displaySIR()
+        {
 
             List<string> SIR = new List<string>();
             List<string> sortCode = new List<string>();
             List<string> incident = new List<string>();
+
 
             emailSingleton es = emailSingleton.getInstance();
 
@@ -65,18 +92,13 @@ namespace Napier_Bank_Messaging
 
             string SIRstring = string.Empty;
 
-            for(int i=0; i<SIR.Count; i++)
+            for (int i = 0; i < SIR.Count; i++)
             {
                 SIRstring = SIRstring + SIR[i] + " Sort Code: " + sortCode[i] + " Nature of Incident: " + incident[i] + "\n";
 
             }
 
             SIRText.Text = SIRstring;
-        }
-
-        private void EndBtn_Click(object sender, RoutedEventArgs e)
-        {
-            System.Environment.Exit(0);
         }
     }
 }

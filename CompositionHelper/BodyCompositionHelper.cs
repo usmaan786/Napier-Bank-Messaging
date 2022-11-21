@@ -31,16 +31,6 @@ namespace CompositionHelper
             }
 
         }
-        public string Execute(string messageBody)
-        {
-            string result=null;
-           
-                    result = BodyProcessPlugin.GetBody(messageBody);
-                
-           
-            return result;
-
-        }
 
         public string[] ExecuteHashtag(string messageBody)
         {

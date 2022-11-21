@@ -11,12 +11,8 @@ namespace CompositionHelper
 {
     [Export(typeof(IBodyProcess))]
 
-    public class EmailProcess : IBodyProcess
+    public class BodyProcess : IBodyProcess
     {
-        public string GetBody(string messageBody)
-        {
-            return "Email is from X .";
-        }
 
         public string[] GetHashtag(string messageBody)
         {

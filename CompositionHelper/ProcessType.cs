@@ -37,7 +37,7 @@ namespace CompositionHelper
 
 
 
-                 return "This is a Tweet.";
+                 return "Tweet Processed.";
             }
             else if(letter.Length > 1 && letter[0].Equals('S'))
             {
@@ -59,7 +59,7 @@ namespace CompositionHelper
                 
 
                 
-                return "This is a SMS Text Message.";
+                return "SMS Text Message Processed.";
             }
             else if(letter.Length > 1 && letter[0].Equals('E'))
             {
@@ -130,21 +130,14 @@ namespace CompositionHelper
                     }
                     catch (Exception ex)
                     {
-                        return "Type - Email | No valid URL links found";
+                        return "Email Processed | No valid URL links found";
                     }
                 
 
-
-
-
-
-
-
-
-                return "This is an Email.";
+                return "Email Processed.";
             }
 
-            return "Didn't return value.";
+            return "Invalid Header.";
 
         }
     }

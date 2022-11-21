@@ -9,8 +9,6 @@ namespace Contract
 {
     public interface IBodyProcess
     {
-       string GetBody(string messageBody);
-
         string[] GetHashtag(string messageBody);
 
         string[] GetMention(string messageBody);

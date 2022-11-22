@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Napier_Bank_Messaging
 {
+    //Class Object for Emails - also creates multiple instances of class URL to store multiple URL objects within an Email object
     public class Email
     {
 

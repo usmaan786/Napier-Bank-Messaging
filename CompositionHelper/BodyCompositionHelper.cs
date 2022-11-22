@@ -10,11 +10,14 @@ using System.Reflection;
 
 namespace CompositionHelper
 {
+    //Composition Helper Class to execute methods defined for IBodyProcecss interface.
     public class BodyCompositionHelper
     {
         [Import(typeof(IBodyProcess))]
             public IBodyProcess BodyProcessPlugin { get; set; }
 
+
+        //Assembling components
         public void AssembleBodyComponents()
         {
             try
@@ -32,6 +35,7 @@ namespace CompositionHelper
 
         }
 
+        //Calling GetHashtag with parameters from main window
         public string[] ExecuteHashtag(string messageBody)
         {
             string[] result = null;
@@ -41,6 +45,7 @@ namespace CompositionHelper
             return result;
         }
 
+        //Calling GetMention with parameters from main window
         public string[] ExecuteMention(string messageBody)
         {
 
@@ -49,6 +54,8 @@ namespace CompositionHelper
           
             return result;
         }
+
+        //Calling GetSortCode with parameters from main window
 
         public string ExecuteSIR(string messageBody)
         {
@@ -61,6 +68,7 @@ namespace CompositionHelper
             return result;
         }
 
+        //Calling GetIncident with parameters from main window
         public string ExecuteIncident(string messageBody,string[] incidentData)
         {
             string result = null;
@@ -72,6 +80,7 @@ namespace CompositionHelper
             return result;
         }
 
+        //Calling GetTextspeak with parameters from main window
         public string ExecuteTextspeak(ref string messageBody, string[] textspeakAbbrev)
         {
             string result = null;
@@ -81,6 +90,7 @@ namespace CompositionHelper
             return result;
         }
 
+        //Calling GetURL with parameters from main window
         public string[] ExecuteURL(string messageBody)
         {
             string[] result;

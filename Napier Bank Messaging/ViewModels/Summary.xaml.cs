@@ -19,6 +19,7 @@ namespace Napier_Bank_Messaging
     /// <summary>
     /// Interaction logic for Summary.xaml
     /// </summary>
+    /// Summary Window that calls methods to display a list of Hashtags, Mentions and SIRs
     public partial class Summary : Window
     {
         public Summary()
@@ -34,11 +35,13 @@ namespace Napier_Bank_Messaging
             
         }
 
+        //End Button the terminates the program on click
         private void EndBtn_Click(object sender, RoutedEventArgs e)
         {
             System.Environment.Exit(0);
         }
 
+        //Calls hashtagList within tweet DB to obtain list of all hashtags to display
         public void displayHashtag()
         {
             tweetSingleton ts = tweetSingleton.getInstance();
@@ -55,10 +58,13 @@ namespace Napier_Bank_Messaging
                 hashtagString = hashtagString + hashtags[i] + " - " + count[i] + "\n";
             }
 
-            HashtagText.Text = hashtagString;
+            string finalHashtagString = hashtagString.Substring(0, hashtagString.LastIndexOf("-"));
+
+            HashtagText.Text = finalHashtagString;
 
         }
 
+        //Calls mentionList within tweet DB to obtain list of all mentions to display
         public void displayMention()
         {
             tweetSingleton ts = tweetSingleton.getInstance();
@@ -78,6 +84,7 @@ namespace Napier_Bank_Messaging
 
         }
 
+        //Calls SIRList within email DB to obtain list of all SIRs to display 
         public void displaySIR()
         {
 

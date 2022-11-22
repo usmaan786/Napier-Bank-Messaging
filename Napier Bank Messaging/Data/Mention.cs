@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace Napier_Bank_Messaging
 {
+    //Class object for Mentions to be used within a Tweet object
     class Mention
     {
         private string tweet;
         private string mention;
 
+        //Constructor to be used to create Hashtag object
         public Mention(string tweet, string mention)
         {
             TweetID = tweet;

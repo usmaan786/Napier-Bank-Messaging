@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Napier_Bank_Messaging
 {
+    //Database for all SMS object classes 
     class SmsDB
     {
+        //Creating SMS database
         private Dictionary<string, SMS> db = new Dictionary<string, SMS>();
 
         public void add(string key, SMS val)
@@ -22,6 +24,7 @@ namespace Napier_Bank_Messaging
             }
         }
 
+        //Getting specific SMS object
         public SMS get(string val)
         {
             return db[val];

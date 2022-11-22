@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace Napier_Bank_Messaging
 {
+    //Database for all Tweet object classes 
+
     class TweetDB
     {
+        //Creating Tweet database
+
         private Dictionary<string, Tweet> db = new Dictionary<string, Tweet>();
 
         public void add(string key, Tweet val)
@@ -22,12 +26,13 @@ namespace Napier_Bank_Messaging
             }
         }
 
+        //Getting specific Tweet object
         public Tweet get(string val)
         {
             return db[val];
         }
 
-
+        //Allocating a Hashtag input to the specified Email object
         public void allocateHashtag(ref string tweetID, string hashtag)
         {
             foreach (var item in db.Values)
@@ -40,6 +45,7 @@ namespace Napier_Bank_Messaging
             return;
         }
 
+        //Allocating a Mention input to the specified Email object
         public void allocateMention(ref string tweetID, string mention)
         {
             foreach (var item in db.Values)
@@ -52,6 +58,7 @@ namespace Napier_Bank_Messaging
             return;
         }
 
+        //Adding contents of all Tweet objects with Hashtags to a list to display on call
         public void hashtagList(ref List<string> hashtags, ref List<int> count)
         {
          
@@ -77,6 +84,7 @@ namespace Napier_Bank_Messaging
             return;
         }
 
+        //Adding contents of all Tweet objects with Mentions to a list to display on call
         public void mentionList(ref List<string> mentions)
         {
             foreach(var item in db.Values)

@@ -5,6 +5,7 @@ using System.IO;
 
 namespace UnitTestProject1
 {
+    //Unit Test for the Interface Methods.
     [TestClass]
     public class UnitTest1
     {
@@ -12,6 +13,7 @@ namespace UnitTestProject1
         ProcessCompositionHelper helper;
         BodyCompositionHelper bodyHelper;
 
+        //Testing Handling of Tweets for isolating the Tweet Type, Sender Handler and Message.
         [TestMethod]
         public void TestTweetHandling()
         {
@@ -35,6 +37,7 @@ namespace UnitTestProject1
             Assert.AreEqual(expectedMessage, message);
         }
 
+        //Testing Handling of Tweet Message Body. Isolation of Hashtags and Mentions.
         [TestMethod]
         public void TestTweetBody()
         {
@@ -58,6 +61,8 @@ namespace UnitTestProject1
 
         }
 
+
+        //Testing Handling of Emails for isolating the Email Type, Sender, Subject and Message.
         [TestMethod]
 
         public void TestEmailHandling()
@@ -88,6 +93,7 @@ namespace UnitTestProject1
         
         }
         
+        //Testing Handling for Email Type - Serious Incident Report. Isolating Sort Code and Nature of Incident.
         [TestMethod]
         public void TestEmailSIR()
         {
@@ -108,6 +114,8 @@ namespace UnitTestProject1
             Assert.AreEqual(expectedIncident, incident);
         }
 
+
+        //Testing Handling of SMS Text Messages for isolating the Sender (Phone number), Message and Outputting a modified body for textspeak abbreviations.
         [TestMethod]
         public void TestSMS()
         {

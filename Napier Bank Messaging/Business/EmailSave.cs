@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Contract
+namespace Napier_Bank_Messaging.Business
 {
-    public class Class1
+    internal class EmailSave
     {
     }
 }

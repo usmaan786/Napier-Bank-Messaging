@@ -6,8 +6,10 @@ using System.Collections.Generic;
 
 namespace Napier_Bank_Messaging
 {
+    //Database for all Email object classes 
     class EmailDB
     {
+        //Creating Email database
         private Dictionary<string, Email> db = new Dictionary<string, Email>();
 
         public void add(string key, Email val)
@@ -22,20 +24,14 @@ namespace Napier_Bank_Messaging
             }
         }
 
+        //Getting specific Email object
         public Email get(string val)
         {
             return db[val];
         }
 
-        public void returnListTest(ref String emailList)
-        {
-            foreach (var item in db.Values)
-            {
-                emailList = emailList + "Subject - " + item.Subject + " " + item.SortCode + " " + item.Incident + " " + "\n";
-            }
-            return;
-        }
 
+        //Allocating a URL input to the specified Email object
         public void allocateURL(ref string emailID, string url)
         {
             foreach(var item in db.Values)
@@ -48,6 +44,7 @@ namespace Napier_Bank_Messaging
             return;
         }
 
+        //Adding contents of all Email objects with Serious Incident Reports to a list to display on call
         public void SIRList(ref List<string> SIRs, ref List<string>sortCodes, ref List<string>incidents)
         {
             foreach(var item in db.Values)

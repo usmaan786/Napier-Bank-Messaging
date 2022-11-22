@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Napier_Bank_Messaging
 {
+    //Class Object for Tweet - also creates multiple instances of class Hashtag and Mention to store multiple Hashtag and Mention objects within an Email object
     public class Tweet
     {
         private string id;

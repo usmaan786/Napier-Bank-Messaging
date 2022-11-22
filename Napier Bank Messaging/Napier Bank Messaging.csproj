@@ -60,6 +60,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Business\EmailSave.cs" />
+    <Compile Include="Business\SMSsave.cs" />
+    <Compile Include="Business\TweetSave.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Data\Email.cs" />
     <Compile Include="Data\EmailDB.cs" />

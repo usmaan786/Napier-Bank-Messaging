@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Napier_Bank_Messaging
 {
+    //Class object for SMS Text Messages to hold ID, Sender and Message
     public class SMS
     {
         private string id;

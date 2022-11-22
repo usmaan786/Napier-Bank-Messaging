@@ -11,10 +11,13 @@ namespace CompositionHelper
     [Export(typeof(IProcess))]
     public class ProcessType : IProcess
     {
+        //Definiton for GetType that will process a message according to the header's initial character
         public string GetType(string messageHeader, string messageBody, ref string sender, ref string subject, ref string message)
         {
-
+            //Checking initial character of message header and processing according to that 
             char[] letter= messageHeader.ToCharArray();
+
+            //If header is a tweet splits message and finds sender and message and stores data.
             if(letter.Length > 1 && letter[0].Equals('T'))
             {
                 try
@@ -34,11 +37,10 @@ namespace CompositionHelper
                     return "Twitter handle invalid or exceeds 15 characters.";
                 }
 
-
-
-
                  return "Tweet Processed.";
             }
+
+            //If header is a SMS splits message and gets Sender phone number and message and stores data
             else if(letter.Length > 1 && letter[0].Equals('S'))
             {
                 try
@@ -61,6 +63,8 @@ namespace CompositionHelper
                 
                 return "SMS Text Message Processed.";
             }
+
+            //If header is an Email message looks for Sender email address and stores.
             else if(letter.Length > 1 && letter[0].Equals('E'))
             {
 
@@ -78,6 +82,8 @@ namespace CompositionHelper
                     return "No email address";
                 }
 
+
+                //Checks if message body is a Serious Incident Report and stores that information
                 try
                 {
                     string[] line = messageBody.Split(' ');
@@ -113,6 +119,8 @@ namespace CompositionHelper
                     return "No subject";
                 }
 
+
+                //Checks if message body contains any URls and quarantines them for redisplay.
                 try
                   {
                         string[] value = message.Split(' ');

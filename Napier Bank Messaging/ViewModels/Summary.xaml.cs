@@ -32,6 +32,7 @@ namespace Napier_Bank_Messaging
 
             displaySIR();
 
+            displayURL();
             
         }
 
@@ -57,10 +58,18 @@ namespace Napier_Bank_Messaging
             {
                 hashtagString = hashtagString + hashtags[i] + " - " + count[i] + "\n";
             }
+            try
+            {
+                string finalHashtagString = hashtagString.Substring(0, hashtagString.LastIndexOf("-"));
+                HashtagText.Text = finalHashtagString;
 
-            string finalHashtagString = hashtagString.Substring(0, hashtagString.LastIndexOf("-"));
+            }
+            catch (Exception ex)
+            {
+                HashtagText.Text = hashtagString;
+            }
 
-            HashtagText.Text = finalHashtagString;
+            
 
         }
 
@@ -82,6 +91,24 @@ namespace Napier_Bank_Messaging
 
             MentionText.Text = mentionsString;
 
+        }
+
+        public void displayURL()
+        {
+            emailSingleton es = emailSingleton.getInstance();
+
+            List<string> URLs = new List<string>();
+
+            es.returnURL(ref URLs);
+
+            string URLstring = string.Empty;
+
+            foreach(string url in URLs)
+            {
+                URLstring = URLstring + url + "\n";
+            }
+
+            URLText.Text = URLstring;
         }
 
         //Calls SIRList within email DB to obtain list of all SIRs to display 

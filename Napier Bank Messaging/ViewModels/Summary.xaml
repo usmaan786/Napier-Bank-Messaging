@@ -7,12 +7,23 @@
         mc:Ignorable="d"
         Title="Summary" Height="450" Width="800">
     <Grid>
-        <TextBox x:Name ="HashtagText" HorizontalAlignment="Left" Margin="59,69,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="188" Height="252"/>
-        <TextBox x:Name="SIRText" HorizontalAlignment="Left" Margin="571,69,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="188" Height="252"/>
-        <TextBox x:Name ="MentionText" HorizontalAlignment="Center" Margin="0,69,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="188" Height="252"/>
-        <TextBlock HorizontalAlignment="Left" Margin="59,43,0,0" TextWrapping="Wrap" Text="Hashtag List" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="306,43,0,0" TextWrapping="Wrap" Text="Mention List" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="571,43,0,0" TextWrapping="Wrap" Text="SIR Report List" VerticalAlignment="Top"/>
+        <TextBox x:Name ="HashtagText" HorizontalAlignment="Left" Margin="40,69,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Height="252"/>
+        <TextBox x:Name ="URLText" HorizontalAlignment="Left" Margin="598,69,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Height="252"/>
+        <TextBox x:Name="SIRText" HorizontalAlignment="Left" Margin="428,69,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Height="252"/>
+        <TextBox x:Name ="MentionText" HorizontalAlignment="Left" Margin="204,69,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Height="252" RenderTransformOrigin="0.5,0.5">
+            <TextBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="0.373"/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="0.612"/>
+                </TransformGroup>
+            </TextBox.RenderTransform>
+        </TextBox>
+        <TextBlock HorizontalAlignment="Left" Margin="40,43,0,0" TextWrapping="Wrap" Text="Hashtag List" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="208,43,0,0" TextWrapping="Wrap" Text="Mention List" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="428,43,0,0" TextWrapping="Wrap" Text="SIR Report List" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="598,43,0,0" TextWrapping="Wrap" Text="Quarantined URLs" VerticalAlignment="Top"/>
         <Button x:Name="EndBtn" Content="End" HorizontalAlignment="Center" Margin="0,377,0,0" VerticalAlignment="Top" Click="EndBtn_Click" Width="115"/>
     </Grid>
 </Window>

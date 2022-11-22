@@ -56,9 +56,20 @@ namespace Napier_Bank_Messaging
                     incidents.Add(item.Incident);
                 }
             }
+            return;
+        }
 
-
-
+        //Adding contents of all Email objects with URLs to a list to display on call
+        public void URLlist(ref List<string> URLs)
+        {
+            foreach(var item in db.Values)
+            {
+                string[] list = item.urlList.Split(' ');
+                foreach(string line in list)
+                {
+                    URLs.Add(line);
+                }
+            }
             return;
         }
     }

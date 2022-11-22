@@ -52,5 +52,12 @@ namespace Napier_Bank_Messaging
             db.SIRList(ref SIRs, ref sortCodes, ref incidents);
             return;
         }
+
+        //Calling URLlist to return list of URLs
+        public void returnURL(ref List<string> URLs)
+        {
+            db.URLlist(ref URLs);
+            return;
+        }
     }
 }

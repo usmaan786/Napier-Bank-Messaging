@@ -93,6 +93,7 @@ namespace Napier_Bank_Messaging
 
         }
 
+        //Calls URLlist within email DB to obtain list of all URLs to display 
         public void displayURL()
         {
             emailSingleton es = emailSingleton.getInstance();

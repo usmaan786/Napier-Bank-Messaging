@@ -149,7 +149,8 @@ namespace Napier_Bank_Messaging.ViewModels
                 //If the email is a SIR process accordingly and find Sort Code and Nature of Incident
                 if(subject.Contains("SIR"))
                 {
-                    string[] incidentData = File.ReadAllLines(@"F:\Software Coursework 2022\incident.csv");
+                //incident.csv should be located in the root of C: drive
+                    string[] incidentData = File.ReadAllLines(@"C:\incident.csv");
                     string sortCode = null;
                     string incident = null;
                     string[] urlList = null;
@@ -199,7 +200,8 @@ namespace Napier_Bank_Messaging.ViewModels
         //ExpandText inputs a CSV file of textspeak abbreviations and calls helper functions to find those abbreviations and sanitize message for redisplay
         public void ExpandText()
         {
-            string[] textspeak = File.ReadAllLines(@"F:\Software Coursework 2022\textwords (1).csv");
+        //textwords.csv should be located in the root of C: drive
+            string[] textspeak = File.ReadAllLines(@"C:\textwords.csv");
             if (Formatted == false)
             {
                 string expandedText = ExpandedText;

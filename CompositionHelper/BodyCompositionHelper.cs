@@ -10,12 +10,14 @@ using System.Reflection;
 
 namespace CompositionHelper
 {
+    //Composition Helper Class to execute methods defined for IBodyProcecss interface.
     public class BodyCompositionHelper
     {
-        [ImportMany]
-        public System.Lazy<IBodyProcess, IDictionary<string, object>>[]
-            BodyProcessPlugin { get; set; }
+        [Import(typeof(IBodyProcess))]
+            public IBodyProcess BodyProcessPlugin { get; set; }
 
+
+        //Assembling components
         public void AssembleBodyComponents()
         {
             try
@@ -32,94 +34,69 @@ namespace CompositionHelper
             }
 
         }
-        public string Execute(string messageBody, string operationMethod)
-        {
-            string result=null;
-            foreach (var BodyPlug in BodyProcessPlugin)
-            {
-                if ((string)BodyPlug.Metadata["BodyMetaData"] == operationMethod)
-                {
-                    result = BodyPlug.Value.GetBody(messageBody);
-                    break;
-                }
 
-            }
-            return result;
-
-        }
-
-        public string[] ExecuteHashtag(string messageBody, string operationMethod)
+        //Calling GetHashtag with parameters from main window
+        public string[] ExecuteHashtag(string messageBody)
         {
             string[] result = null;
-            foreach(var BodyPlug in BodyProcessPlugin)
-            {
-                if((string)BodyPlug.Metadata["BodyMetaData"]==operationMethod)
-                {
-                    result = BodyPlug.Value.GetHashtag(messageBody);
-                    break;
-                }
+
+                    result = BodyProcessPlugin.GetHashtag(messageBody);
+                   
+            return result;
+        }
+
+        //Calling GetMention with parameters from main window
+        public string[] ExecuteMention(string messageBody)
+        {
+
+            string[] result = BodyProcessPlugin.GetMention(messageBody);
+                   
+          
+            return result;
+        }
+
+        //Calling GetSortCode with parameters from main window
+
+        public string ExecuteSIR(string messageBody)
+        {
+            string result = null;
+           
+                    result = BodyProcessPlugin.GetSortCode(messageBody);
+          
+
             
-            }
             return result;
         }
 
-        public string[] ExecuteMention(string messageBody, string operationMethod)
-        {
-            string[] result = null;
-            foreach (var BodyPlug in BodyProcessPlugin)
-            {
-                if ((string)BodyPlug.Metadata["BodyMetaData"] == operationMethod)
-                {
-                    result = BodyPlug.Value.GetMention(messageBody);
-                    break;
-                }
-
-            }
-            return result;
-        }
-
-        public string ExecuteSIR(string messageBody, string operationMethod)
+        //Calling GetIncident with parameters from main window
+        public string ExecuteIncident(string messageBody,string[] incidentData)
         {
             string result = null;
-            foreach (var BodyPlug in BodyProcessPlugin)
-            {
-                if ((string)BodyPlug.Metadata["BodyMetaData"] == operationMethod)
-                {
-                    result = BodyPlug.Value.GetSortCode(messageBody);
-                    break;
-                }
+         
+                    result = BodyProcessPlugin.GetIncident(messageBody, incidentData);
+         
 
-            }
+            
             return result;
         }
 
-        public string ExecuteIncident(string messageBody, string operationMethod)
+        //Calling GetTextspeak with parameters from main window
+        public string ExecuteTextspeak(ref string messageBody, string[] textspeakAbbrev)
         {
             string result = null;
-            foreach (var BodyPlug in BodyProcessPlugin)
-            {
-                if ((string)BodyPlug.Metadata["BodyMetaData"] == operationMethod)
-                {
-                    result = BodyPlug.Value.GetIncident(messageBody);
-                    break;
-                }
-
-            }
+                    result = BodyProcessPlugin.GetTextspeak(ref messageBody, textspeakAbbrev);
+              
+              
             return result;
         }
 
-        public string ExecuteTextspeak(ref string messageBody, string[] textspeakAbbrev, string operationMethod)
+        //Calling GetURL with parameters from main window
+        public string[] ExecuteURL(string messageBody)
         {
-            string result = null;
-            foreach (var BodyPlug in BodyProcessPlugin)
-            {
-                if ((string)BodyPlug.Metadata["BodyMetaData"] == operationMethod)
-                {
-                    result = BodyPlug.Value.GetTextspeak(ref messageBody, textspeakAbbrev);
-                    break;
-                }
+            string[] result;
 
-            }
+            result = BodyProcessPlugin.GetURL(messageBody);
+
             return result;
         }
     }

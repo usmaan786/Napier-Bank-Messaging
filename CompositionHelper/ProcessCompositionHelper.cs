@@ -11,11 +11,14 @@ using System.Reflection;
 
 namespace CompositionHelper
 {
+    //Composition helper for methods defined for IProcess interface class.
     public class ProcessCompositionHelper
     {
         [Import(typeof(IProcess))]
         public IProcess ProcessPlugin { get; set; }
 
+
+        //Assembling components
         public void AssembleProcessComponents()
         {
             try
@@ -32,9 +35,11 @@ namespace CompositionHelper
             }
 
         }
-        public string Execute(string messageHeader)
+
+        //Calling GetType method with parameters from main window
+        public string Execute(string messageHeader, string messageBody, ref string sender, ref string subject, ref string message)
         {
-            return ProcessPlugin.GetType(messageHeader);
+            return ProcessPlugin.GetType(messageHeader, messageBody, ref sender, ref subject, ref message);
         }
     }
 }

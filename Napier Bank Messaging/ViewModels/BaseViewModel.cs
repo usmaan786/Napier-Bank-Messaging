@@ -7,6 +7,7 @@ using System.ComponentModel;
 
 namespace Napier_Bank_Messaging.ViewModels
 {
+    //Base View Model to update changes on MainWindowViewModel
     public class BaseViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;

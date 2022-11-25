@@ -100,7 +100,7 @@ namespace UnitTestProject1
             bodyHelper = new BodyCompositionHelper();
             bodyHelper.AssembleBodyComponents();
 
-            string[] incidentData = File.ReadAllLines(@"F:\Software Coursework 2022\incident.csv");
+            string[] incidentData = File.ReadAllLines(@"C:\incident.csv");
 
             string inputMessage = "usmaan@napier.ac.uk SIR 25/12/2022 Sort Code: 40-40-40 Nature of Incident: Raid";
 
